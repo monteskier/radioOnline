@@ -1,7 +1,7 @@
 function Radio(audio){
   this.audio = audio;  
   this.active = false;
-  this.emisoras = JSON.parse(localStorage.getItem('emisores')) || [];
+  this.emisoras = JSON.parse(localStorage.getItem('emisoras')) || [];
   //this.allow="play";
 }
 
@@ -21,6 +21,7 @@ Radio.prototype.addEmisora =  function(e){
 
   this.emisoras.push(obj);
   ui.emisorasHTML(this.emisoras);
+  localStorage.removeItem('emisoras');
   localStorage.setItem('emisoras',JSON.stringify(this.emisoras));
 }
 
