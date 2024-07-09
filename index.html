@@ -21,6 +21,12 @@
 
                 <label class="form-label ms-3 me-2 pt-1" for="url_emisora">URL:</label>
                 <input type="text" class="form-control" id="url_emisora" name="url_emisora"/>
+                
+                <label class="form-check-label ms-3 me-2 pt-1" for="chk_es_video">
+                <input class="form-check-input" type="checkbox" value="es_video" id="chk_es_video">
+                  Es url de video?
+                </label>
+                
 
                 <input type="submit" class="btn btn-primary" value="Desar"></input>
               </div>
@@ -119,8 +125,10 @@
     <div class="row my-3">
       <div class="col-12 radio-container">
         <audio id="audio" controls=0 src="">
-
         </audio>
+        <video id="video" class="d-none"  controls=0 autoplay name="media" src="">
+          <!--http://chrome.frilab.com:8000/digitalhits-->
+        </video>
       </div>
     </div>
   </div>

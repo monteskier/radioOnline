@@ -11,15 +11,17 @@ const horaContainer = document.querySelector('#hora-container');
 const btnAddTime = document.querySelector('#btnAddTime'); 
 const btnSubmit = document.querySelector('#subAddConf');
 const form = document.querySelector('#form');
+const chk_es_video =  document.querySelector('#chk_es_video');
 const programacioContainer = document.querySelector('#programacio-container');
 const audio = document.querySelector("#audio");
+const video = document.querySelector("#video");
 
 const emisorasForm = document.querySelector("#form_emisoras");
 const emisorasList = document.querySelector("#emisora_list");
 const emisorasItems = document.querySelector("#emisorasItems");
 
 
-const radio = new Radio(audio);
+const radio = new Radio(audio, video);
 const ui =  new UI();
 
 

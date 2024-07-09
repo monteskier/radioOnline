@@ -1,5 +1,6 @@
-function Radio(audio){
-  this.audio = audio;  
+function Radio(audio, video){
+  this.audio = audio; 
+  this.video = video; 
   this.active = false;
   this.emisoras = JSON.parse(localStorage.getItem('emisoras')) || [];
   //this.allow="play";
@@ -9,6 +10,7 @@ Radio.prototype.addEmisora =  function(e){
   e.preventDefault();
   nom = emisorasForm.querySelector('#nom_emisora').value;
   url = emisorasForm.querySelector('#url_emisora').value;
+  es_video = chk_es_video.checked;
 
   if(nom.length == 0 && url.length == 0){
     console.log('no hi han dades...');
@@ -16,7 +18,8 @@ Radio.prototype.addEmisora =  function(e){
   }
   const obj = {
     nom,
-    url
+    url,
+    es_video
   };
 
   this.emisoras.push(obj);
@@ -24,6 +27,7 @@ Radio.prototype.addEmisora =  function(e){
   localStorage.removeItem('emisoras');
   localStorage.setItem('emisoras',JSON.stringify(this.emisoras));
 }
+
 
 
 Radio.prototype.mostrar = function(config){    
@@ -36,12 +40,23 @@ Radio.prototype.mostrar = function(config){
       const primerDiv = tdOnline.querySelector('div');
       primerDiv.style=('display:block');
       const emisora = this.emisoras.find( emi => emi.nom === config.emisora);
+      switch(emisora.es_video){
+        case true://cas de audio en video
+          
+          this.video.src = emisora.url;
+          this.video.classList.remove('d-none');
+          this.video.classList.add('d-block');
+          this.video.play();
+          break;
+        case false://cas de audio en mp3
+          this.audio.src=emisora.url;
+          this.audio.play(); //en cas que no, posem el src del url la emisora que toca.
+          break;
+        
+        }
+        this.active = true;
       
-      this.audio.src=emisora.url;
-      this.audio.play(); //en cas que no, posem el src del url la emisora que toca.
-      this.active = true;
     }
-      
 }
 
 Radio.prototype.amagar = function(){
@@ -50,9 +65,17 @@ Radio.prototype.amagar = function(){
     const spinner =  tr.firstChild.querySelector('div.cargando');
     spinner.style=('display:none');
   })
-  this.audio.pause();
-  this.audio.src='';
-  this.active = false;
+    //Amegem els widget video      
+    this.video.pause();
+    this.video.src = '';
+    this.video.classList.remove('d-block');
+    this.video.classList.add('d-none');
+    
+    //Amegem els widget audio
+    this.audio.pause();
+    this.audio.src='';
+
+    this.active = false;
   
   
 }
