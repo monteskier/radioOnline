@@ -46,11 +46,11 @@ Radio.prototype.mostrar = function(config){
           this.video.src = emisora.url;
           this.video.classList.remove('d-none');
           this.video.classList.add('d-block');
-          this.video.play();
+          //this.video.play();
           break;
         case false://cas de audio en mp3
           this.audio.src=emisora.url;
-          this.audio.play(); //en cas que no, posem el src del url la emisora que toca.
+          //this.audio.play(); //en cas que no, posem el src del url la emisora que toca.
           break;
         
         }
